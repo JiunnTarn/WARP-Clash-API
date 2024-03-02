@@ -24,11 +24,12 @@ class NodeNameGenerator:
     This class is used for generate unique node names
     """
 
-    def __init__(self, random_name=True):
+    def __init__(self, random_name=True, add_emoji=True):
         self.random_name = random_name
         self.fake = Faker()
         self.used_names = set()
         self.counter = 1  # Used when random_name is False
+        self.add_emoji = add_emoji
 
     def generate_unique_name(self, country_emoji, country):
         """
@@ -41,19 +42,22 @@ class NodeNameGenerator:
         cnt = 0  # Used to avoid infinite loop
         while True:
             if name_type == 'color':
-                name = f"{country_emoji} {country}-CF-{self.fake.color_name()}"
+                name = f"{country}-CF-{self.fake.color_name()}"
                 cnt += 1
                 if cnt > 100:
                     name_type = 'alternate'  # If color name is not available, use alternate name
                     cnt = 0  # Reset counter
             elif name_type == 'alternate':
-                name = f"{country_emoji} {country}-CF-{self.fake.city()}"  # When color name is not available
+                name = f"{country}-CF-{self.fake.city()}"  # When color name is not available
                 cnt += 1
                 if cnt > 100:
                     name_type = 'random'  # If alternate name is not available, use random name
                     cnt = 0
             else:  # When name_type is invalid
-                name = f"{country_emoji} {country}-CF-{uuid.uuid4()}"  # Use UUID to ensure uniqueness
+                name = f"{country}-CF-{uuid.uuid4()}"  # Use UUID to ensure uniqueness
+
+            if self.add_emoji:
+                name = f"{country_emoji} {name}"
 
             if name not in self.used_names:
                 self.used_names.add(name)
@@ -70,6 +74,8 @@ class NodeNameGenerator:
             # Try to generate a unique name, first try color name, then try alternate name
             return self.generate_unique_name(country_emoji, country)
         else:
-            name = f"{country_emoji} {country}-CF-WARP-{self.counter}"
+            name = f"{country}-CF-WARP-{self.counter}"
+            if self.add_emoji:
+                name = f"{country_emoji} {name}"
             self.counter += 1
             return name

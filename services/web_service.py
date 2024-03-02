@@ -186,6 +186,7 @@ def attachEndpoints(app: Flask):
         random_name = request.args.get('randomName', 'false').lower() == "true" or False
         proxy_format = request.args.get('proxyFormat', 'full').lower()
         ipv6 = request.args.get('ipv6', 'false').lower() == "true" or False
+        add_emoji = request.args.get('addEmoji', 'true').lower() == "true" or False
 
         headers = {
             'Content-Type': 'application/x-yaml; charset=utf-8',
@@ -206,7 +207,8 @@ def attachEndpoints(app: Flask):
                                              proxy_format=proxy_format,
                                              random_name=random_name,
                                              is_android=is_android,
-                                             ipv6=ipv6)
+                                             ipv6=ipv6,
+                                             add_emoji=add_emoji)
             file_name = f'Clash-{fake.color_name()}.yaml'
 
         elif sub_type == "wireguard":  # Wireguard
@@ -222,7 +224,8 @@ def attachEndpoints(app: Flask):
                                              best=best,
                                              random_name=random_name,
                                              proxy_format=proxy_format,
-                                             ipv6=ipv6)
+                                             ipv6=ipv6,
+                                             add_emoji=add_emoji)
             file_name = f'Surge-{fake.color_name()}.conf'
 
         elif sub_type == 'shadowrocket':  # Shadowrocket
@@ -230,7 +233,8 @@ def attachEndpoints(app: Flask):
                                                     logger,
                                                     best=best,
                                                     random_name=random_name,
-                                                    ipv6=ipv6)
+                                                    ipv6=ipv6,
+                                                    add_emoji=add_emoji)
             file_name = f'Shadowrocket-{fake.color_name()}.conf'
 
         elif sub_type == 'sing-box':  # Sing Box
@@ -238,7 +242,8 @@ def attachEndpoints(app: Flask):
                                                logger,
                                                best=best,
                                                random_name=random_name,
-                                               ipv6=ipv6)
+                                               ipv6=ipv6,
+                                               add_emoji=add_emoji)
             file_name = f'SingBox-{fake.color_name()}.json'
 
         # This might be deprecated in the future.
@@ -248,7 +253,8 @@ def attachEndpoints(app: Flask):
                                              best=best,
                                              proxy_format='with_groups',
                                              random_name=random_name,
-                                             ipv6=ipv6)
+                                             ipv6=ipv6,
+                                             add_emoji=add_emoji)
             file_name = f'Clash-{fake.color_name()}.yaml'
 
         else:

@@ -78,7 +78,8 @@ def generateClashSubFile(account: Account = None,
                          proxy_format='full',
                          random_name=False,
                          is_android=False,
-                         ipv6=False):
+                         ipv6=False,
+                         add_emoji=True):
     """
     Generate Clash subscription file
     :param random_name: Whether to use random name
@@ -88,6 +89,7 @@ def generateClashSubFile(account: Account = None,
     :param best: Whether to use the best entrypoints
     :param is_android: Whether the client is Android
     :param ipv6: Whether to use ipv6 entrypoints
+    :param add_emoji: Whether to add emoji to the node name
     :return:
     """
     account = getCurrentAccount(logger) if account is None else account
@@ -100,7 +102,7 @@ def generateClashSubFile(account: Account = None,
     user_config = []
 
     # Initialize NodeNameGenerator
-    node_name_generator = NodeNameGenerator(random_name)
+    node_name_generator = NodeNameGenerator(random_name, add_emoji)
 
     # Use len() instead of RANDOM_COUNT because the entrypoints may be less than RANDOM_COUNT
     for i in range(len(random_points)):
@@ -190,7 +192,8 @@ def generateSurgeSubFile(account: Account = None,
                          best=False,
                          proxy_format='full',
                          random_name=False,
-                         ipv6=False):
+                         ipv6=False,
+                         add_emoji=True):
     """
     Generate Surge subscription file
     :param random_name: Whether to use random name
@@ -199,6 +202,7 @@ def generateSurgeSubFile(account: Account = None,
     :param logger:
     :param best: Whether to use the best entrypoints
     :param ipv6: Whether to use ipv6 entrypoints
+    :param add_emoji: Whether to add emoji to the node name
     :return:
     """
     account = getCurrentAccount(logger) if account is None else account
@@ -230,7 +234,7 @@ def generateSurgeSubFile(account: Account = None,
     surge_config = copy.deepcopy(SURGE)
 
     # Initialize NodeNameGenerator
-    node_name_generator = NodeNameGenerator(random_name)
+    node_name_generator = NodeNameGenerator(random_name, add_emoji)
 
     for config in user_config:
         # random a name like 2FDEC93F, num and upper letter
@@ -283,7 +287,8 @@ def generateShadowRocketSubFile(account: Account = None,
                                 logger=logging.getLogger(__name__),
                                 best=False,
                                 random_name=False,
-                                ipv6=False):
+                                ipv6=False,
+                                add_emoji=True):
     """
     Generate ShadowRocket subscription file
     :param account:
@@ -291,6 +296,7 @@ def generateShadowRocketSubFile(account: Account = None,
     :param best: Whether to use the best entrypoints
     :param random_name: Whether to use random name
     :param ipv6: Whether to use ipv6 entrypoints
+    :param add_emoji: Whether to add emoji to the node name
     :return:
     """
     account = getCurrentAccount(logger) if account is None else account
@@ -300,7 +306,7 @@ def generateShadowRocketSubFile(account: Account = None,
         return msg
 
     # Initialize NodeNameGenerator
-    node_name_generator = NodeNameGenerator(random_name)
+    node_name_generator = NodeNameGenerator(random_name, add_emoji)
 
     url_list = []
     # Use len() instead of RANDOM_COUNT because the entrypoints may be less than RANDOM_COUNT
@@ -327,7 +333,8 @@ def generateSingBoxSubFile(account: Account = None,
                            logger=logging.getLogger(__name__),
                            random_name=False,
                            best=False,
-                           ipv6=False):
+                           ipv6=False,
+                           add_emoji=True):
     """
     Generate SingBox subscription file
     :param account:
@@ -335,6 +342,7 @@ def generateSingBoxSubFile(account: Account = None,
     :param random_name: Whether to use random name
     :param best: Whether to use the best entrypoints
     :param ipv6: Whether to use ipv6 entrypoints
+    :param add_emoji: Whether to add emoji to the node name
     :return:
     """
     account = getCurrentAccount(logger) if account is None else account
@@ -344,7 +352,7 @@ def generateSingBoxSubFile(account: Account = None,
         return msg
 
     # Initialize NodeNameGenerator
-    node_name_generator = NodeNameGenerator(random_name)
+    node_name_generator = NodeNameGenerator(random_name, add_emoji)
 
     sing_box_json = copy.deepcopy(SING_BOX)
 

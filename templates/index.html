@@ -118,6 +118,9 @@
         <label>
             <input type="checkbox" id="ipv6" onchange="generateLink()"> IPv6
         </label>
+        <label>
+            <input type="checkbox" id="addEmoji" onchange="generateLink()"> 节点名称添加 Emoji
+        </label>
     </div>
     <div>
         <br/>
@@ -164,12 +167,14 @@
         const randomName = document.getElementById('randomName').checked;
         const proxyFormat = document.getElementById('proxyFormat').value;
         const ipv6 = document.getElementById('ipv6').checked;
+        const addEmoji = document.getElementById('addEmoji').checked;
         const baseUrl = location.protocol + '//' + location.host + '/';
         const queryParams = new URLSearchParams({
             best,
             randomName,
             proxyFormat,
-            ipv6
+            ipv6,
+            addEmoji
         });
 
         if (password.length) {
