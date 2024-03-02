@@ -8,7 +8,9 @@ ARG GITHUB_ACTIONS
 RUN if [ "$GITHUB_ACTIONS" != "true" ]; then \
         sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories; \
     fi
-RUN apk add --no-cache bash build-base libffi-dev openssl-dev
+RUN apk add --no-cache bash build-base libffi-dev openssl-dev tzdata
+
+ENV TZ=Asia/Shanghai
 
 # Install Python dependencies
 COPY requirements.txt ./
