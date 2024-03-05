@@ -134,7 +134,8 @@ def generateClashSubFile(account: Account = None,
     clash_json = copy.deepcopy(CLASH)
     clash_json["proxies"] = user_config
     for proxy_group in clash_json["proxy-groups"]:
-        proxy_group["proxies"] += [proxy["name"] for proxy in user_config]
+        if not proxy_group["name"] == "PROXY":
+            proxy_group["proxies"] += [proxy["name"] for proxy in user_config]
 
     # Generate YAML file
     if proxy_format == 'only_proxies':
